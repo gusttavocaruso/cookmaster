@@ -1,4 +1,4 @@
-const joi = require('joi');
+const joi = require('@hapi/joi');
 const errorHandle = require('./errorHandle');
 const { findUserByEmail } = require('../models/users.models');
 
