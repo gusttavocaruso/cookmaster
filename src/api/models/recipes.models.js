@@ -34,9 +34,16 @@ const editRecipe = async (id, newRecipeFormat) => {
     );
 };
 
+const deleteRecipe = async (id) => {
+  const db = await connect();
+  await db.collection('recipes')
+    .remove({ _id: ObjectId(id) });
+};
+
 module.exports = {
   createRecipe,
   getRecipes,
   getRecipeById,
   editRecipe,
+  deleteRecipe,
 };
