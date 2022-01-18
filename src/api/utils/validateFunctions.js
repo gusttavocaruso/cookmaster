@@ -7,13 +7,24 @@ const emailAlreadyExists = async (email) => {
   if (userMail) throw errorHandle(409, 'Email already registered');
 };
 
-const entriesValidation = async (name, email, password) => {
+const userEntriesValidation = async (name, email, password) => {
   const isValidEmail = joi.string().email().required();
   const { error } = isValidEmail.validate(email);
   if (!name || !password || error) {
     throw errorHandle(400, 'Invalid entries. Try again.');
   }
   await emailAlreadyExists(email);
+};
+
+const recipeEntriesValidation = async (name, ingredients, preparation) => {
+  const recipeSchema = joi.object({
+    name: joi.string().required(),
+    ingredients: joi.string().required(),
+    preparation: joi.string().required(),
+  });
+
+  const { error } = recipeSchema.validate({ name, ingredients, preparation });
+  if (error) throw errorHandle(400, 'Invalid entries. Try again.');
 };
 
 const loginValidations = (email, pss) => {
@@ -32,8 +43,14 @@ const userNpasswordValidate = (uss, pss) => {
   }
 };
 
+const tokenValidation = (token) => {
+  if (!token) throw errorHandle(401, 'jwt malformed');
+};
+
 module.exports = {
-  entriesValidation,
+  userEntriesValidation,
   loginValidations,
   userNpasswordValidate,
+  tokenValidation,
+  recipeEntriesValidation,
 };

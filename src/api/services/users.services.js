@@ -1,10 +1,10 @@
 const { createUser, findUserByEmail } = require('../models/users.models');
 const { tokenGenerate } = require('./tokenService');
-const { entriesValidation, loginValidations,
+const { userEntriesValidation, loginValidations,
   userNpasswordValidate } = require('../utils/validateFunctions');
 
 const createUserService = async ({ name, email, password }) => {
-  await entriesValidation(name, email, password);
+  await userEntriesValidation(name, email, password);
 
   const userCreated = await createUser(name, email, password);
   return { user: userCreated };
