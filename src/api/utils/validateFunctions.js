@@ -47,10 +47,22 @@ const tokenValidation = (token) => {
   if (!token) throw errorHandle(401, 'jwt malformed');
 };
 
+const recipeValidation = (recipe) => {
+  if (!recipe) throw errorHandle(404, 'recipe not found');
+};
+
+const idValidation = (id) => {
+  const isValidId = joi.string().length(24).required();
+  const { error } = isValidId.validate(id);
+  if (error) throw errorHandle(404, 'recipe not found');
+};
+
 module.exports = {
   userEntriesValidation,
   loginValidations,
   userNpasswordValidate,
   tokenValidation,
   recipeEntriesValidation,
+  recipeValidation,
+  idValidation,
 };
