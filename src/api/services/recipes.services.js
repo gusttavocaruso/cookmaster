@@ -1,4 +1,4 @@
-const { createRecipe } = require('../models/recipes.models');
+const { createRecipe, getRecipes } = require('../models/recipes.models');
 const { recipeEntriesValidation } = require('../utils/validateFunctions');
 
 const createRecipeServices = async ({ name, ingredients, preparation }) => {
@@ -8,6 +8,12 @@ const createRecipeServices = async ({ name, ingredients, preparation }) => {
   return recipeId;
 };
 
+const getRecipesService = async () => {
+  const recipes = await getRecipes();
+  return recipes;
+};
+
 module.exports = {
   createRecipeServices,
+  getRecipesService,
 };

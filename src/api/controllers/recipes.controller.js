@@ -1,4 +1,5 @@
-const { createRecipeServices } = require('../services/recipes.services');
+const { createRecipeServices, getRecipesService,
+  } = require('../services/recipes.services');
 
 const recipeCreate = async (req, res, next) => {
   try {
@@ -16,6 +17,17 @@ const recipeCreate = async (req, res, next) => {
   }
 };
 
+const recipesGet = async (_req, res, next) => {
+  try {
+    const recipes = await getRecipesService();
+    return res.status(200).json(recipes);
+  } catch (error) {
+    console.log(error.message);
+    next(error);
+  }
+};
+
 module.exports = {
   recipeCreate,
+  recipesGet,
 };
