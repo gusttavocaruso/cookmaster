@@ -2,8 +2,8 @@ const express = require('express');
 const auth = require('../middlewares/auth');
 
 const { userCreate, logIN } = require('../controllers/users.controller');
-const { recipeCreate, recipesGet,
-  recipeGetById } = require('../controllers/recipes.controller');
+const { recipeCreate, recipesGet, recipeGetById,
+  } = require('../controllers/recipes.controller');
 
 const router = express.Router();
 
