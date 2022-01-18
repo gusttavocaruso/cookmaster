@@ -8,8 +8,8 @@ const tokenGenerate = (data) => jwt.sign({ data }, API_SECRET, JWT_CONFIG);
 const tokenVerify = (token) => {
   try {
     const { data } = jwt.verify(token, API_SECRET);
-    const { _id } = data;
-    return _id;
+    const { _id, role } = data;
+    return { userId: _id, role };
   } catch (error) {
     console.log('varification failure');
     return null;
