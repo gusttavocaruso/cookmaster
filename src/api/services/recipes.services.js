@@ -1,5 +1,5 @@
 const { createRecipe, getRecipes, getRecipeById, deleteRecipe,
-  editRecipe } = require('../models/recipes.models');
+  editRecipe, addImage } = require('../models/recipes.models');
 const { recipeEntriesValidation, recipeValidation,
   idValidation } = require('../utils/validateFunctions');
 
@@ -22,6 +22,12 @@ const getRecipeByIdService = async (id) => {
   return recipe;
 };
 
+const addImageService = async (id) => {
+  const imageRoute = `localhost:3000/src/uploads/${id}.jpeg`;
+  await addImage(id, imageRoute);
+  return imageRoute;
+};
+
 const editRecipeService = async (id, newRecipeFormat) => {
   await editRecipe(id, newRecipeFormat);
 };
@@ -36,4 +42,5 @@ module.exports = {
   getRecipeByIdService,
   editRecipeService,
   deleteRecipeService,
+  addImageService,
 };
