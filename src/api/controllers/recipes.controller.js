@@ -45,10 +45,10 @@ const addRecipeImage = async (req, res, next) => {
     const { id: _id } = req.params;
     const { userId } = req.user;
 
-    const route = await addImageService(_id);
+    const path = await addImageService(_id);
     const recipe = await getRecipeByIdService(_id);
 
-    const resp = { _id, ...recipe, userId, image: route };
+    const resp = { _id, ...recipe, userId, image: path };
     return res.status(200).json(resp);
   } catch (error) {
     console.log(error.message);
